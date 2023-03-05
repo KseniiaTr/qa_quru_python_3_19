@@ -7,3 +7,4 @@ allure-pytest
 python-dotenv~=1.0.0
 
 curlify~=2.2.1
+Faker~=17.6.0

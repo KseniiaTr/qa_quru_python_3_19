@@ -3,6 +3,7 @@ import os
 import allure
 from dotenv import load_dotenv
 from selene import have
+from faker import Faker
 
 from selene.support.shared import browser
 
@@ -10,9 +11,11 @@ from selene.support.shared import browser
 load_dotenv()
 
 SHOP_URL = os.getenv("SHOP_URL")
-LOGIN = os.getenv("LOGIN")
+#LOGIN = os.getenv("LOGIN")
 PASSWORD = os.getenv("PASSWORD")
 
+fake = Faker()
+email = fake.email()
 
 @allure.step("Open browser")
 def test_register():
@@ -23,14 +26,14 @@ def test_register():
         browser.element("[id=gender-male]").click()
         browser.element("[id=FirstName]").type("Ivan")
         browser.element("[id=LastName").type("Egorov")
-        browser.element("[id=Email]").type(LOGIN)
+        browser.element("[id=Email]").type(email)
         browser.element("[id=Password]").type(PASSWORD)
         browser.element("[id=ConfirmPassword]").type(PASSWORD)
 
     with allure.step("Confirm"):
         browser.element("[id=register-button]").click()
 
-        #browser.element(".account").should(have.text(LOGIN))
+        browser.element(".account").should(have.text(email))
 
 
 def test_sigh_in(demoshop):

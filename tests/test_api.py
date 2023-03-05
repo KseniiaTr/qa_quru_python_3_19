@@ -12,7 +12,7 @@ def test_assert_code_status(regres):
     assert response.status_code == 200
 
 
-def test_assert_response(regres):
+def test_receive_response(regres):
     response: Response = regres.get("/unknown/2")
     print(response.json())
     assert response.json().get('data').get('pantone_value')
